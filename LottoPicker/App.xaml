@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Application xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="LottoPicker.App">
+
+    <Application.Resources>
+        <ResourceDictionary>
+            <Color x:Key="ControlColor">#2196F3</Color>
+            <Color x:Key="ControlTextColor">White</Color>
+
+            <Style TargetType="Button"
+                   ApplyToDerivedTypes="True"
+                   CanCascade="True">
+                <Setter Property="CornerRadius" Value="5" />
+                <Setter Property="FontSize" Value="Medium" />
+                <Setter Property="BackgroundColor" Value="{StaticResource ControlColor}" />
+                <Setter Property="TextColor" Value="{StaticResource ControlTextColor}" />
+            </Style>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

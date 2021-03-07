@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="LottoPicker.MainPage"
+             xmlns:vm="clr-namespace:LottoPicker.ViewModels;assembly=LottoPicker"
+             >
+
+    <StackLayout
+        Margin="20"
+        >
+        <Frame BackgroundColor="#2196F3" Padding="24" CornerRadius="0">
+            <Label Text="Lottery Number Picker" HorizontalTextAlignment="Center" TextColor="White" FontSize="36"/>
+        </Frame>
+
+        <Label x:Name="lblTicketDisplay" Text="Ticket"></Label>
+
+        <Entry x:Name="Ticket"
+            Placeholder="Ticket number will display here"
+            IsEnabled="False"
+            HorizontalOptions="Fill"
+            Text="{Binding TicketDisplay}" />
+
+        <Button x:Name="CommandCopyTicket" 
+                Text="Copy to clipboard"
+                WidthRequest="300"
+                HorizontalOptions="Center"
+                Command="{Binding CopyTicketToClipboardCommand}" />
+
+        <Label x:Name="lblNumberPickerButtons" Text="Generate Numbers"></Label>
+
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Button x:Name="Pick649" 
+                Text="6/49"
+                Command="{Binding Pick649TicketCommand}"
+                 /> 
+
+            <Button Grid.Column="1"
+                x:Name="PickMax"
+                Text="Lotto Max"
+                Command="{Binding PickLottoMaxTicketCommand}"
+                 /> 
+        </Grid>
+
+    </StackLayout>
+
+</ContentPage>
