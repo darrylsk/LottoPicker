@@ -3,7 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="LottoPicker.MainPage"
              xmlns:vm="clr-namespace:LottoPicker.ViewModels;assembly=LottoPicker"
-             >
+             xmlns:system="clr-namespace:System;assembly=netstandard"
+             xmlns:behaviors="clr-namespace:LottoPicker.Behaviors;assembly=LottoPicker">
 
     <StackLayout
         Margin="20"
@@ -26,10 +27,41 @@
                 HorizontalOptions="Center"
                 Command="{Binding CopyTicketToClipboardCommand}" />
 
+        <Picker SelectedItem="{Binding LottoGameName}"
+                SelectedIndex="{Binding LottoGameId}"
+                Title="Select Game">
+            <Picker.Behaviors>
+                <behaviors:EventToCommandBehavior
+                    EventName="SelectedIndexChanged"
+                    Command="{Binding PickLottoNumbersCommand}"
+                    EventArgsConverter="{StaticResource SelectedIndexChangedEventArgsConverter}" />
+            </Picker.Behaviors>
+            <Picker.ItemsSource>
+                <x:Array Type="{x:Type x:String}">
+                    <x:String>Lotto 6/49</x:String>
+                    <x:String>Lotto Max</x:String>
+                </x:Array>
+            </Picker.ItemsSource>
+        </Picker>
+        <!--<ListView>
+            <ListView.ItemsSource>
+                <x:Array Type="{x:Type x:String}">
+                    <x:String>Lotto 6/49</x:String>
+                    <x:String>Lotto Max</x:String>
+                </x:Array>
+            </ListView.ItemsSource>
+            <ListView.Behaviors>
+                <behaviors:EventToCommandBehavior
+                    EventName="ItemTapped"
+                    Command="{Binding PickLottoNumbersCommand}"
+                    EventArgsConverter="{StaticResource ItemTappedEventArgsConverter}" />
+            </ListView.Behaviors>
+        </ListView>-->
         <Label x:Name="lblNumberPickerButtons" Text="Generate Numbers"></Label>
 
         <Grid>
             <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
@@ -43,6 +75,11 @@
                 Text="Lotto Max"
                 Command="{Binding PickLottoMaxTicketCommand}"
                  /> 
+            <Button Grid.Column="2"
+                    x:Name="DrawNumbers"
+                    Text="Pick Numbers"
+                    Command="{Binding PickNumbersCommand}"
+                    />
         </Grid>
 
     </StackLayout>

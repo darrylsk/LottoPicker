@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Application xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:converters="clr-namespace:LottoPicker.Converters;assembly=LottoPicker"
              x:Class="LottoPicker.App">
 
     <Application.Resources>
@@ -16,6 +17,10 @@
                 <Setter Property="BackgroundColor" Value="{StaticResource ControlColor}" />
                 <Setter Property="TextColor" Value="{StaticResource ControlTextColor}" />
             </Style>
+
+            <converters:SelectedIndexChangedEventArgsConverter x:Key="SelectedIndexChangedEventArgsConverter" />
+            <converters:ItemTappedEventArgsConverter x:Key="ItemTappedEventArgsConverter" />
+
         </ResourceDictionary>
     </Application.Resources>
 </Application>

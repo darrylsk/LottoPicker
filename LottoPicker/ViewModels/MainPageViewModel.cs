@@ -17,8 +17,13 @@ namespace LottoPicker.ViewModels
             NumberPicker = numberPicker;
             CopyTicketToClipboardCommand =
                 new Command(execute: CopyTicketToClipboard, canExecute: CopyTicketTextToClipboardCanExecute);
+
+            // number picker commands
             Pick649TicketCommand = new Command(Pick649Ticket);
             PickLottoMaxTicketCommand = new Command(PickLottoMaxTicket);
+
+            // This Command will replace all the other number picker commands in this class
+            PickLottoNumbersCommand = new Command<object>(selectedGame => PickLottoNumbers(selectedGame));
         }
 
         #region Bound Commands
@@ -26,6 +31,7 @@ namespace LottoPicker.ViewModels
         public ICommand CopyTicketToClipboardCommand { get; }
         public ICommand Pick649TicketCommand { get; }
         public ICommand PickLottoMaxTicketCommand { get; }
+        public ICommand PickLottoNumbersCommand { get; }
 
         #endregion
 
@@ -43,6 +49,24 @@ namespace LottoPicker.ViewModels
         private bool CopyTicketTextToClipboardCanExecute()
         {
             return TicketDisplay.Length > 0;
+        }
+
+        /// <summary>
+        /// This method will replace all the other delegate methods defined for this class.
+        /// </summary>
+        private void PickLottoNumbers(object picker)
+        {
+            switch (picker)
+            {
+                case "Lotto Max":
+                    PickLottoMaxTicket();
+                    break;
+
+                case "Lotto 6/49":
+                default:
+                    Pick649Ticket();
+                    break;
+            }
         }
 
         private void Pick649Ticket()

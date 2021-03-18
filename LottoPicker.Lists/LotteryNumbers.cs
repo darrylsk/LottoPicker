@@ -16,6 +16,7 @@ namespace LottoPicker.Lists
         }
 
         private Dictionary<string, PickList> _sources;
+        private Dictionary<string, PickRange> _lists;
 
         public IUserDefinedList<int> Pick649()
         {
@@ -92,6 +93,22 @@ namespace LottoPicker.Lists
                 }
             };
 
+            _lists = new Dictionary<string, PickRange>
+            {
+                {
+                    "max", new PickRange
+                    {
+                        Minimum = 1, Maximum = 50, DrawSize = 7
+                    }
+                },
+                {
+                    "649", new PickRange
+                    {
+                        Minimum = 1, Maximum = 49, DrawSize = 6
+                    }
+                },
+            };
+
         }
 
         private class PickList
@@ -101,6 +118,14 @@ namespace LottoPicker.Lists
             public int[] Numbers { get; set; }
 
             public int RangeSize => Numbers.Length;
+        }
+
+        private class PickRange
+        {
+            public int Minimum { get; set; }
+            public int  Maximum { get; set; }
+            public int DrawSize { get; set; }
+            public int RangeSize => Maximum - Minimum + 1;
         }
     }
 }
